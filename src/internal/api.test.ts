@@ -20,16 +20,12 @@ test("SlackWebApi parameters and responses", async () => {
   const config = { authToken: "AUTH_TOKEN", channelId: "CHANNEL_ID" };
   const api = new SlackWebApi(config);
 
-  const result = await api.postMessage({ text: "hello" });
+  const result = await api.postMessage({ text: "hello slack api" });
 
   // authorizationとcontent-typeのheaderの設定が必須
-  expect(request?.headers.get("authorization")).toBe("Bearer AUTH_TOKEN");
-  expect(request?.headers.get("content-type")).toBe("application/json; charset=utf-8");
+  expect(request?.headers.get("content-type")).toBe("application/x-www-form-urlencoded; charset=utf-8");
   // channelのフィールドがconfigの値で設定されている
-  expect(await request?.json()).toStrictEqual({
-    channel: "CHANNEL_ID",
-    text: "hello",
-  });
+  expect(await request?.body).toBe("token=AUTH_TOKEN&channel=CHANNEL_ID&text=hello+slack+api");
   // responseがそのまま返却されている
   expect(result).toStrictEqual(responseBody);
 });

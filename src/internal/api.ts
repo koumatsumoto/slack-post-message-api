@@ -17,15 +17,36 @@ export class SlackWebApi {
     return await fetch("https://slack.com/api/chat.postMessage", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        Authorization: `Bearer ${this.#config.authToken}`,
+        // content-type=application/jsonはcorsの問題がある
+        // ブラウザから使うためにはapplication/x-www-form-urlencodedを使う必要がある
+        "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
       },
-      body: JSON.stringify({
+      body: makeFormUrlencodedData({
+        token: this.#config.authToken,
         channel: this.#config.channelId,
         ...params,
       }),
     }).then(handleResponse<PostMessageResult>);
   }
+}
+
+function makeFormUrlencodedData(values: Record<string, any>) {
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(values)) {
+    if (
+      typeof value === "string" ||
+      typeof value === "number" ||
+      typeof value === "boolean" ||
+      value === undefined ||
+      value === null
+    ) {
+      params.set(key, String(value));
+    } else {
+      params.set(key, JSON.stringify(value));
+    }
+    params.set(key, value);
+  }
+  return params;
 }
 
 async function handleResponse<T extends Record<string, any>>(res: Response): Promise<SlackApiResponse<T>> {

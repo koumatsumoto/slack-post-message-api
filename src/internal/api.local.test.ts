@@ -7,4 +7,7 @@ test.skip("SlackWebApi local development", async () => {
   });
 
   expect(api).toBeDefined();
+
+  const res = await api.postMessage({ text: "hello" });
+  expect(res).toBeDefined();
 });
