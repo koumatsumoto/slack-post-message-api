@@ -133,3 +133,6 @@ dist
 /.idea/
 /.fleet/
 /.vscode/
+
+# npm credential and setting file
+/.npmrc
