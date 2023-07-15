@@ -3,12 +3,13 @@ import { createMessageWithDataBlocks } from "./block-templates";
 
 const AUTH_TOKEN = process.env["SLACK_AUTH_TOKEN"] ?? "";
 const CHANNEL_ID = process.env["SLACK_CHANNEL_ID"] ?? "";
-const hasEnvironments = AUTH_TOKEN && CHANNEL_ID;
+// 開発時はtrueにする。このテストがgit hooksのタイミングで走ると都合が悪いのでこの設定を入れている。
+const runLocalTest = false;
 
 // Slack APIを手元から実行して動作確認するためのテストファイル
 test("local development", async () => {
   // WebStormでrunIfを使うとテストの個別実行ができなくなってしまうため、if文で制御している
-  if (!hasEnvironments) {
+  if (!runLocalTest) {
     return;
   }
 

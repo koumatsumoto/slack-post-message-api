@@ -19,7 +19,9 @@ export default defineConfig({
   ],
   test: {
     includeSource: ["src/**/*.{js,ts}"],
+    testTimeout: 30000,
     globals: true,
     setupFiles: "dotenv/config",
+    reporters: ["verbose", "hanging-process"],
   },
 });
