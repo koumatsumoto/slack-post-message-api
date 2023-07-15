@@ -1,15 +1,15 @@
 {
-  "name": "@koumatsumoto/npm-package-template-2023",
+  "name": "@koumatsumoto/slack-post-message-api",
   "version": "1.0.0",
   "description": "The project template to create new npm package using GitHub Packages registry",
   "author": "Kou Matsumoto",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/koumatsumoto/npm-package-template-2023.git"
+    "url": "git+https://github.com/koumatsumoto/slack-post-message-api.git"
   },
-  "homepage": "https://github.com/koumatsumoto/npm-package-template-2023#readme",
+  "homepage": "https://github.com/koumatsumoto/slack-post-message-api#readme",
   "bugs": {
-    "url": "https://github.com/koumatsumoto/npm-package-template-2023/issues"
+    "url": "https://github.com/koumatsumoto/slack-post-message-api/issues"
   },
   "engines": {
     "node": ">=20.0.0",
