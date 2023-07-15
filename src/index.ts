@@ -1,3 +1,1 @@
-export function main() {
-  // implement module
-}
+export { SlackWebApi } from "./internal/api";

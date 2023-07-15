@@ -20,5 +20,6 @@ export default defineConfig({
   test: {
     includeSource: ["src/**/*.{js,ts}"],
     globals: true,
+    setupFiles: "dotenv/config",
   },
 });
