@@ -1,2 +1,2 @@
-export { SlackWebApi } from "./internal/api/api";
-export { createTitleAndDatalinesBlocks } from "./internal/block-template/templates";
+export { SlackWebApi } from "./internal/api";
+export { createMessageWithDataBlocks } from "./internal/block-templates";

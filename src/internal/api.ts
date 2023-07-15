@@ -1,5 +1,6 @@
 import type { PostMessageParams } from "./parameter-types";
 import type { PostMessageResult, SlackApiResponse } from "./response-types";
+import { stringify } from "./stringify";
 
 interface Config {
   authToken: string;
@@ -31,21 +32,7 @@ export class SlackWebApi {
 }
 
 function makeFormUrlencodedData(values: Record<string, any>): string {
-  const params = new URLSearchParams();
-  for (const [key, value] of Object.entries(values)) {
-    if (
-      typeof value === "string" ||
-      typeof value === "number" ||
-      typeof value === "boolean" ||
-      value === undefined ||
-      value === null
-    ) {
-      params.set(key, String(value));
-    } else {
-      params.set(key, JSON.stringify(value));
-    }
-  }
-  return params.toString();
+  return new URLSearchParams(Object.entries(values).map(([key, value]) => [key, stringify(value)])).toString();
 }
 
 async function handleResponse<T extends Record<string, any>>(res: Response): Promise<SlackApiResponse<T>> {

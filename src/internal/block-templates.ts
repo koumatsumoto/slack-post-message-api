@@ -1,11 +1,10 @@
 /**
  * 便利のために個人的によく使うblocksのテンプレートをこのモジュールに含めてある
  */
+import type { Block, KnownBlock } from "./parameter-types";
 
-type PrimitiveValue = string | number | boolean | null | undefined;
-
-export function createTitleAndDatalinesBlocks(heading: string, data: Record<string, PrimitiveValue>) {
-  return [
+export function createMessageWithDataBlocks(heading: string, data?: Record<string, any>) {
+  const blocks: (KnownBlock | Block)[] = [
     {
       type: "section",
       text: {
@@ -13,7 +12,10 @@ export function createTitleAndDatalinesBlocks(heading: string, data: Record<stri
         text: heading,
       },
     },
-    {
+  ];
+
+  if (data) {
+    blocks.push({
       type: "context",
       elements: [
         {
@@ -23,6 +25,8 @@ export function createTitleAndDatalinesBlocks(heading: string, data: Record<stri
             .join("\n"),
         },
       ],
-    },
-  ];
+    });
+  }
+
+  return blocks;
 }

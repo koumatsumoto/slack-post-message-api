@@ -1,5 +1,5 @@
-import { SlackWebApi } from "./api/api";
-import { createTitleAndDatalinesBlocks } from "./block-template/templates";
+import { SlackWebApi } from "./api";
+import { createMessageWithDataBlocks } from "./block-templates";
 
 const AUTH_TOKEN = process.env["SLACK_AUTH_TOKEN"] ?? "";
 const CHANNEL_ID = process.env["SLACK_CHANNEL_ID"] ?? "";
@@ -18,7 +18,7 @@ test("local development", async () => {
   });
 
   const res = await api.postMessage({
-    blocks: createTitleAndDatalinesBlocks("hello from local test", {
+    blocks: createMessageWithDataBlocks("hello from local test", {
       field1: "field1",
       field2: "field2",
     }),
