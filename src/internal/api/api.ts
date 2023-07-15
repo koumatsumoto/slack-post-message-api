@@ -30,7 +30,7 @@ export class SlackWebApi {
   }
 }
 
-function makeFormUrlencodedData(values: Record<string, any>) {
+function makeFormUrlencodedData(values: Record<string, any>): string {
   const params = new URLSearchParams();
   for (const [key, value] of Object.entries(values)) {
     if (
@@ -44,9 +44,8 @@ function makeFormUrlencodedData(values: Record<string, any>) {
     } else {
       params.set(key, JSON.stringify(value));
     }
-    params.set(key, value);
   }
-  return params;
+  return params.toString();
 }
 
 async function handleResponse<T extends Record<string, any>>(res: Response): Promise<SlackApiResponse<T>> {
